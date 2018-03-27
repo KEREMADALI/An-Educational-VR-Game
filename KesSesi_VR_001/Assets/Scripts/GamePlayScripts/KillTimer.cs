@@ -10,7 +10,8 @@ public class KillTimer : MonoBehaviour {
 
     public bool killable = true;
     public int targetIndex;
-    public static float timer = 0f;
+    //public static float timer = 0f;
+    public  float timer = 0f;
 
     #endregion
 
@@ -18,6 +19,7 @@ public class KillTimer : MonoBehaviour {
 
     private float timerLimit = 1f;
     private MenuHandler menuHandlerScript;
+    private GazeImageHandler progressBarHandlerScript;
 
     #endregion
 
@@ -37,22 +39,36 @@ public class KillTimer : MonoBehaviour {
             Debug.Log("KillTimer_Start_MenuHandler script is null!");
             return;
         }
+
+        GameObject timerCircle = GameObject.Find("TimerCircle");
+        if (timerCircle != null)
+            progressBarHandlerScript = timerCircle.GetComponent<GazeImageHandler>();
     }
 
     public void Update() { 
 
         timer += Time.deltaTime;
+        if(progressBarHandlerScript != null)
+            progressBarHandlerScript.updateProgressBar(timer, timerLimit);
 
-        if (timer >= timerLimit){;
+        if (timer >= timerLimit){
+            // Might be useless due to it is also called with the pointerexit trigger should be checked
             resetTimer();
+            // This letter is dead recalculate the point
             informCalculator();
+            // Explode the letter
             sliceLetter();     
         }
     }
 
+
     // Zero outs the timer and that zero outs the progress bar
     public void resetTimer() {
         timer = 0f;
+        if (progressBarHandlerScript != null)
+            progressBarHandlerScript.updateProgressBar(timer, timerLimit);
+        else
+            Debug.Log("ProgressBar is null");
     }
 
     #endregion
@@ -89,6 +105,7 @@ public class KillTimer : MonoBehaviour {
             menuHandlerScript.gameResults[targetIndex].miss();
         }
     }
+
     #endregion
 
 

@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class TimeBar : MonoBehaviour {
 
-    private float time;
-    private float fullTime;
+    public float time;
+    public float fullTime;
     private Image bar;
 
     public Color fullColor;

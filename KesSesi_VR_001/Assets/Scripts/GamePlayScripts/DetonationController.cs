@@ -16,7 +16,7 @@ public class DetonationController : MonoBehaviour {
     //Radius of the explostion
     private float radius = 5.0f;
     //Particles that will be effected from the explosion
-    private GameObject[] colliders = new GameObject[20];
+    private GameObject[] colliders;
     private int particleNum = 20;
     private float explosionTime = 2.0f;
     private float particleScale = 0.3f;
@@ -32,17 +32,23 @@ public class DetonationController : MonoBehaviour {
     // Create explosion particles
     private void createParticles() {
         GameObject temp;
+        colliders = new GameObject[particleNum];
+
+        // Take color of the parent
+        Color color = this.GetComponent<Renderer>().material.color;
         // Create particles on by one
         for (int i=0;i< particleNum; i++) {
             // Create a random position around the center 
-            Vector3 pos = UnityEngine.Random.onUnitSphere * 0.2f + transform.position;
+            Vector3 pos = UnityEngine.Random.onUnitSphere * 0.15f + transform.position;
             // Letter looks at explosion center
-            Quaternion rot = Quaternion.FromToRotation(transform.position - pos, Vector3.forward);
+            Quaternion rot = Quaternion.FromToRotation(transform.position - pos, Vector3.back);
             // Instantiate
             temp = Instantiate(pref.gameObject, pos, rot);
             // Make particles child of the object to destroy all of them at once
             temp.transform.parent = transform;
-            // SCale particles as small versions of the original object
+            // Set ParentColor
+            temp.GetComponent<Renderer>().material.SetColor("_Color", color);
+            // Scale particles as small versions of the original object
             temp.transform.localScale = new Vector3(
                 temp.transform.localScale.x * particleScale, 
                 temp.transform.localScale.y * particleScale, 

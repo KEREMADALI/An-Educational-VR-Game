@@ -15,14 +15,16 @@ public class CountDown : MonoBehaviour {
     [HideInInspector] 
     public float gameTime;
     // Time limit of the counter
-    public float timeLimit;
+    //public float timeLimit;
     // Text field of the counter of the first screen
-    public Text counterField;
+    //public Text counterField;
     // Is here for to be enabled
     public GameObject letterSpawner;
 
-    void Start () {
-        timer = timeLimit;
+    void Awake () {
+        //timer = timeLimit;
+        
+        letterSpawner.gameObject.SetActive(true);
 
         // Take the time limit for the game
         GameObject menuHandlerObject = GameObject.Find("MenuHandler");
@@ -36,9 +38,10 @@ public class CountDown : MonoBehaviour {
             Debug.Log("MenuHandler script is null! Clock update failed.");
             return;
         }
-        // TODO Multiplies with 15 from debug purpose
+        // TODO Multiplies with 20 for debug purpose
         //60sec * Time Variable From Settings Menu
         gameTime = 20 * (menuHandlerScript.time + 1);
+        timer = gameTime;
 
         // Initial timer value for the UI element
         UIManagerScript.timer = gameTime;
@@ -47,30 +50,38 @@ public class CountDown : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         timer -= Time.deltaTime;
+        /*
         if (!isGameOn)
             updateCounter();
         else if(!isGameFinished) {
             updateGameClock();
         }
+        */
+        if (!isGameFinished) {
+            updateGameClock();
+        }
+            
     }
 
+    /*
     void updateCounter() {
         counterField.text = ((int)timer).ToString("00");
         if (counterField.text == "00")
         {
             timer = gameTime;
-            //gameObject.SetActive(false);
             GetComponent<Text>().enabled = false;
             letterSpawner.gameObject.SetActive(true);
             isGameOn = true;
         }
     }
+    */
 
     void updateGameClock() {
         // update Time bar
         UIManagerScript.timer = timer;
         // TODO Update the clock on the screen
         if (timer < 0.5f) {
+            // TODO not using this variable
             isGameFinished = true;
             // Stop letter spawner
             letterSpawner.gameObject.SetActive(false);

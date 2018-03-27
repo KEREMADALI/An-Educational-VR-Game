@@ -6,17 +6,14 @@ using UnityEngine.UI;
 public class GazeImageHandler : MonoBehaviour {
 
     public Transform progressBar;
-
-    public void Start()
-    {
-        progressBar.GetComponent<Image>().fillAmount = KillTimer.timer;
+    
+    public void Start(){
+        progressBar.GetComponent<Image>().fillAmount = 0.0f;
     }
 
-    void Update () {
-        progressBar.GetComponent<Image>().fillAmount = KillTimer.timer;
-    }
 
-    void OnDestroy() {
-        KillTimer.timer = 0.0f;
+    public void updateProgressBar(float timer, float overTime) {
+        progressBar.GetComponent<Image>().fillAmount = timer/overTime;
     }
+    
 }

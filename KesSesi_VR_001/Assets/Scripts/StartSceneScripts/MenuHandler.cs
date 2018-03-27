@@ -72,8 +72,7 @@ public class MenuHandler : MonoBehaviour {
                 gameResults[index].reset();
 
             // Open game
-            StartCoroutine(changeVRSetting(true));
-            SceneManager.LoadScene(1);
+            StartCoroutine("startGame");
         }
     }
 
@@ -128,6 +127,11 @@ public class MenuHandler : MonoBehaviour {
                 break;
         }
 
+    }
+
+    private IEnumerator startGame() {
+        yield return changeVRSetting(true);
+        SceneManager.LoadScene(1);
     }
 
     private IEnumerator endGame() {

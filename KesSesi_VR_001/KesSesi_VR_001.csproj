@@ -262,6 +262,9 @@
     <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
       <HintPath>C:/Program Files (x86)/Microsoft Visual Studio Tools for Unity/2015/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
+    <Reference Include="Google.ProtocolBuffers">
+      <HintPath>Assets/GoogleVR/Plugins/Google.ProtocolBuffers.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.Advertisements">
       <HintPath>C:/Users/kerem/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.3/UnityEngine.Advertisements.dll</HintPath>
     </Reference>
@@ -282,9 +285,6 @@
     </Reference>
     <Reference Include="UnityEngine.StandardEvents">
       <HintPath>C:/Users/kerem/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.10/UnityEngine.StandardEvents.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.ProtocolBuffers">
-      <HintPath>Assets/GoogleVR/Plugins/Google.ProtocolBuffers.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -391,6 +391,7 @@
     <Compile Include="Assets\Scripts\GamePlayScripts\UI\LookAtCamera.cs" />
     <Compile Include="Assets\Scripts\GamePlayScripts\UI\ScoreCalculator.cs" />
     <Compile Include="Assets\Scripts\GamePlayScripts\UI\SetCrosshair.cs" />
+    <Compile Include="Assets\Scripts\GamePlayScripts\UI\StartGamePanel.cs" />
     <Compile Include="Assets\Scripts\GamePlayScripts\UI\TimeBar.cs" />
     <Compile Include="Assets\Scripts\GamePlayScripts\UI\UIManager.cs" />
     <Compile Include="Assets\Scripts\NewBehaviourScript.cs" />
@@ -399,6 +400,7 @@
     <Compile Include="Assets\Scripts\StartSceneScripts\StartMenuHandler.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\BOXOPHOBIC\Skybox - Cubemap Extended\Shaders\Skybox - Cubemap Extended.shader" />
     <None Include="Assets\GoogleVR\Plugins\Android\AndroidManifest-6DOF.xml" />
     <None Include="Assets\GoogleVR\Plugins\Android\AndroidManifest-Cardboard.xml" />
     <None Include="Assets\GoogleVR\Plugins\Android\AndroidManifest-Daydream.xml" />

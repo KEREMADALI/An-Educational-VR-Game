@@ -58,7 +58,7 @@ public class LetterSpawner : MonoBehaviour {
             if (letter.transform.GetChild(i).GetComponent<BoxCollider>() == null)
             {
                 BoxCollider bc = letter.transform.GetChild(i).gameObject.AddComponent<BoxCollider>();
-                bc.size = new Vector3(1.25f, 1.25f, 1.25f);
+                bc.size = new Vector3(1.2f, 1.2f, 1f);
             }
 
             if (letter.transform.GetChild(i).GetComponent<BoxCollider>() == null)
@@ -67,7 +67,7 @@ public class LetterSpawner : MonoBehaviour {
                 rb.drag = drag;
             }
 
-            letter.transform.GetChild(i).transform.localScale = new Vector3(0.5f, 0.5f, 0.3f);
+            letter.transform.GetChild(i).transform.localScale = new Vector3(0.45f, 0.45f, 0.3f);
 
             letter.transform.GetChild(i).gameObject.layer = 8;
         }
@@ -171,9 +171,9 @@ public class LetterSpawner : MonoBehaviour {
 
             // This section creates random throwing variables. Prevents the objects being thrown away from the map
             if (pos.x < 0f)
-                rb.velocity = new Vector3(Random.Range(-0.5f,0.5f), upSpeed, 0f);//rb.velocity = new Vector3(UnityEngine.Random.Range(-pos.x - wideness, wideness), upSpeed, 0f);
+                rb.velocity = new Vector3(Random.Range(0.5f,1f), upSpeed, 0f);//rb.velocity = new Vector3(UnityEngine.Random.Range(-pos.x - wideness, wideness), upSpeed, 0f);
             else
-                rb.velocity = new Vector3(Random.Range(-0.5f, 0.5f), upSpeed, 0f);//rb.velocity = new Vector3(UnityEngine.Random.Range(-wideness, -pos.x + wideness), upSpeed, 0f);
+                rb.velocity = new Vector3(Random.Range(-1f, 0.5f), upSpeed, 0f);//rb.velocity = new Vector3(UnityEngine.Random.Range(-wideness, -pos.x + wideness), upSpeed, 0f);
             // Waits 1.5 seconds between two spawns
             yield return new WaitForSeconds(Random.Range(0.2f, 1.5f));
         }
