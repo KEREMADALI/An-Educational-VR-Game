@@ -3,10 +3,14 @@ using UnityEngine.UI;
 
 public class CountDown : MonoBehaviour {
 
-    public float timer;
+
     private bool isGameOn = false;
+    private bool isGameFinished = false;
     private MenuHandler menuHandlerScript;
 
+
+    public UIManager UIManagerScript;
+    public float timer;
     // Time limit of the game
     [HideInInspector] 
     public float gameTime;
@@ -34,7 +38,10 @@ public class CountDown : MonoBehaviour {
         }
         // TODO Multiplies with 15 from debug purpose
         //60sec * Time Variable From Settings Menu
-        gameTime = 15 * (menuHandlerScript.time + 1);
+        gameTime = 20 * (menuHandlerScript.time + 1);
+
+        // Initial timer value for the UI element
+        UIManagerScript.timer = gameTime;
     }
 	
 	// Update is called once per frame
@@ -42,7 +49,7 @@ public class CountDown : MonoBehaviour {
         timer -= Time.deltaTime;
         if (!isGameOn)
             updateCounter();
-        else {
+        else if(!isGameFinished) {
             updateGameClock();
         }
     }
@@ -60,8 +67,14 @@ public class CountDown : MonoBehaviour {
     }
 
     void updateGameClock() {
+        // update Time bar
+        UIManagerScript.timer = timer;
         // TODO Update the clock on the screen
         if (timer < 0.5f) {
+            isGameFinished = true;
+            // Stop letter spawner
+            letterSpawner.gameObject.SetActive(false);
+            // Load start menu
             menuHandlerScript.loadScene();
         }
     }

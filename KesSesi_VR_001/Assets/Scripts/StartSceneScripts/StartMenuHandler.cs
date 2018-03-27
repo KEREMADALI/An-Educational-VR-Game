@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,7 +10,7 @@ public class StartMenuHandler : MonoBehaviour {
     public Button playButton;
 
     void Awake() {
-        XRSettings.enabled = false;
+           // Disabling VR mode transferred to MenuHandler
 
         GameObject menuHandlerObject = GameObject.Find("MenuHandler");
         if (menuHandlerObject == null) {
@@ -26,4 +27,6 @@ public class StartMenuHandler : MonoBehaviour {
 
         playButton.onClick.AddListener(menuHandlerScript.loadScene);
     }
+
+  
 }

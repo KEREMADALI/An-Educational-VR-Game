@@ -34,12 +34,7 @@ public class SettingsMenuHandler : MonoBehaviour {
 
         // Will update the on screen values on opening 
         updateFirst();
-        // Set IsRandomToggle trigger and exit the function
-        if (transform.name.Contains("Rastgele")) { 
-            // Add Listener
-            transform.GetChild(1).GetComponent<Toggle>().onValueChanged.AddListener(delegate { menuHandlerScript.updateSettings("Rastgele_0"); });
-            return;
-        }
+
         // Set Group variable toggles and exit the function 
         if (transform.name.Contains("Grup")) {
             foreach (GameObject obj in letterGroupPanels) {
@@ -141,6 +136,11 @@ public class SettingsMenuHandler : MonoBehaviour {
             case "Zorluk": {
                     int index = menuHandlerScript.difficulty;
                     highlightPanelAndDisableOthers(transform.GetChild(index+1));
+                }
+                break;
+            case "Hiz": {
+                    int index = (int) menuHandlerScript.speed;
+                    highlightPanelAndDisableOthers(transform.GetChild(index));
                 }
                 break;
             case "Sure": {

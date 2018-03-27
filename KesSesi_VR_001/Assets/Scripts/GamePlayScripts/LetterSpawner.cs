@@ -1,4 +1,4 @@
-﻿using System;
+﻿
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,29 +14,63 @@ public class LetterSpawner : MonoBehaviour {
 
     #region Private Variables
     // Wideness of the letter spawn area
-    private float wideness = 2f;
+    private float wideness = 2.0f;
+    private float upSpeed = 2f;
+    private float drag = 0.5f;
     private GameObject targetObject;
     private bool isTargetDead = false;
     #endregion
 
     void Awake() {
-        for (int i = 0; i< letter.transform.childCount ;i++) {
-            if (letter.transform.GetChild(i).GetComponent<BoxCollider>() == null){
+       setGameSpeed();
+       setPhysicalSettingsOfLetters();
+    }
+
+
+    //Adjust gravity and speed values to change letter speeds on the air
+    void setGameSpeed() {
+        GameObject menuHandlerObject = GameObject.Find("MenuHandler");
+        if (menuHandlerObject == null)
+        {
+            Debug.Log("LetterSpawner_Awake_MenuHandler object is null!");
+            return;
+        }
+
+        MenuHandler menuHandlerScript = menuHandlerObject.GetComponent<MenuHandler>();
+        if (menuHandlerScript == null)
+        {
+            Debug.Log("LetterSpawner_Awake_MenuHandler script is null!");
+            return;
+        }
+
+        // multiplyValue = 2/4; 3/4; 4/4
+        float multiplyValue = (menuHandlerScript.speed + 1.0f) / 4.0f;
+        Physics.gravity = new Vector3( 0.0f, -1.0f * multiplyValue, 0.0f);
+
+        upSpeed = Mathf.Sqrt(8 * multiplyValue);
+               
+    }
+
+    void setPhysicalSettingsOfLetters() {
+
+        for (int i = 0; i < letter.transform.childCount; i++)
+        {
+            if (letter.transform.GetChild(i).GetComponent<BoxCollider>() == null)
+            {
                 BoxCollider bc = letter.transform.GetChild(i).gameObject.AddComponent<BoxCollider>();
-                bc.size = new Vector3(1.0f, 1.0f, 1.0f);
+                bc.size = new Vector3(1.25f, 1.25f, 1.25f);
             }
 
-            if (letter.transform.GetChild(i).GetComponent<BoxCollider>() == null){
+            if (letter.transform.GetChild(i).GetComponent<BoxCollider>() == null)
+            {
                 Rigidbody rb = letter.transform.GetChild(i).gameObject.AddComponent<Rigidbody>();
-                rb.mass = 1000;
-                rb.drag = 0.5f;
+                rb.drag = drag;
             }
 
-            letter.transform.GetChild(i).transform.localScale = new Vector3(0.4f,0.4f,0.4f);
+            letter.transform.GetChild(i).transform.localScale = new Vector3(0.5f, 0.5f, 0.3f);
 
             letter.transform.GetChild(i).gameObject.layer = 8;
         }
-
     }
 
     void Start () {
@@ -108,35 +142,40 @@ public class LetterSpawner : MonoBehaviour {
             addLetterScripts(ref throwable, randomizedArray[i]);
             // Add Event Triggers
             addLetterEvenTriggers(ref throwable);
-            // Selected target is being marked as killable and with green color, will add points in case of death
+            // Selected target is being marked as killable so it will add points in case of death
             if (randomizedArray[i] == target)
             {
                 targetObject = throwable;
-                throwable.GetComponent<KillTimer>().killable = true;
-                throwable.GetComponent<Renderer>().material.SetColor("_Color", Color.green);
-                if (throwable.transform.childCount > 0)
-                    throwable.transform.GetChild(0).GetComponent<Renderer>().material.SetColor("_Color", Color.green);
+                throwable.GetComponent<KillTimer>().killable = true;           
             }
             // Non-selected targets are being marked as not killable will decrease points in case of death
             else
             {
                 throwable.GetComponent<KillTimer>().killable = false;
             }
+            // Save target value to record score
+            throwable.GetComponent<KillTimer>().targetIndex = target;
+
+            // Make letter and its children a random color
+            Color color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
+            throwable.GetComponent<Renderer>().material.SetColor("_Color", color);
+            if (throwable.transform.childCount > 0)
+                throwable.transform.GetChild(0).GetComponent<Renderer>().material.SetColor("_Color", color);
 
             Rigidbody rb = throwable.GetComponent<Rigidbody>();
             // Create a random spawn point between -wideness and wideness values
-            Vector3 pos = new Vector3(UnityEngine.Random.Range(-wideness, wideness), 0.15f, 3f); ;
+            Vector3 pos = new Vector3(Mathf.RoundToInt(Random.Range(-wideness, wideness)), 0.15f, 3f); ;
             throwable.transform.position = pos;
             // Randomize rotation
-            throwable.transform.rotation = Quaternion.Euler(UnityEngine.Random.Range(-10.0f, 10.0f), UnityEngine.Random.Range(170.0f, 190.0f), UnityEngine.Random.Range(-30.0f,30.0f));
+            throwable.transform.rotation = Quaternion.Euler(Random.Range(-10.0f, 10.0f),Random.Range(170.0f, 190.0f), Random.Range(-30.0f,30.0f));
 
             // This section creates random throwing variables. Prevents the objects being thrown away from the map
             if (pos.x < 0f)
-                rb.velocity = new Vector3(UnityEngine.Random.Range(-pos.x - wideness, wideness), 2f, 0f);
+                rb.velocity = new Vector3(Random.Range(-0.5f,0.5f), upSpeed, 0f);//rb.velocity = new Vector3(UnityEngine.Random.Range(-pos.x - wideness, wideness), upSpeed, 0f);
             else
-                rb.velocity = new Vector3(UnityEngine.Random.Range(-wideness, -pos.x + wideness), 2f, 0f);
+                rb.velocity = new Vector3(Random.Range(-0.5f, 0.5f), upSpeed, 0f);//rb.velocity = new Vector3(UnityEngine.Random.Range(-wideness, -pos.x + wideness), upSpeed, 0f);
             // Waits 1.5 seconds between two spawns
-            yield return new WaitForSeconds(UnityEngine.Random.Range(0.2f, 1.5f));
+            yield return new WaitForSeconds(Random.Range(0.2f, 1.5f));
         }
     }
 

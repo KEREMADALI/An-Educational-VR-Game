@@ -9,26 +9,41 @@ public class KillTimer : MonoBehaviour {
     #region PublicVariables
 
     public bool killable = true;
+    public int targetIndex;
     public static float timer = 0f;
-
-    public Material deadBlue;
 
     #endregion
 
     #region PrivateVariables
 
     private float timerLimit = 1f;
-    
+    private MenuHandler menuHandlerScript;
+
     #endregion
 
     #region Public Functions
+
+    void Start() {
+        GameObject menuHandlerObject = GameObject.Find("MenuHandler");
+        if (menuHandlerObject == null)
+        {
+            Debug.Log("KillTimer_Start_MenuHandler object is null!_KillTimer");
+            return;
+        }
+
+        menuHandlerScript = menuHandlerObject.GetComponent<MenuHandler>();
+        if (menuHandlerScript == null)
+        {
+            Debug.Log("KillTimer_Start_MenuHandler script is null!");
+            return;
+        }
+    }
 
     public void Update() { 
 
         timer += Time.deltaTime;
 
-        if (timer >= timerLimit){
-            Debug.Log("Called");
+        if (timer >= timerLimit){;
             resetTimer();
             informCalculator();
             sliceLetter();     
@@ -60,17 +75,20 @@ public class KillTimer : MonoBehaviour {
     {
         if (killable)
         {
-            // Puan ekle
-            ScoreCalculator.score = ScoreCalculator.score + 2;
-
+            // Add points to the stars
+            UIManager.score = UIManager.score + 2;
+            // Record hit details
+            menuHandlerScript.gameResults[targetIndex].hit();
         }
         else
         {
-            //Puan çıkar
-            ScoreCalculator.score = ScoreCalculator.score - 2;
+            // Substract points from the stars
+            if(UIManager.score > 0)
+            UIManager.score = UIManager.score - 2;
+            // Record hit details
+            menuHandlerScript.gameResults[targetIndex].miss();
         }
     }
-
     #endregion
 
 

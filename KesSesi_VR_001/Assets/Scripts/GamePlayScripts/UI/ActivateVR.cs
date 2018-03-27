@@ -5,9 +5,13 @@ using UnityEngine.XR;
 
 public class ActivateVR : MonoBehaviour {
 
-	void Awake () {
-        // Will enable VR mode
-        XRSettings.enabled = true;
-	}
-	
+    // VR activation moved to MenuHandler
+
+    void Update()
+    {
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
+    }
 }

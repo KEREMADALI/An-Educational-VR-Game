@@ -1,18 +1,21 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
-using System;
+using UnityEngine.XR;
 
 public class MenuHandler : MonoBehaviour {
 
     public static MenuHandler instance;
 
+    public GameObject audioHandler;
+
     public static bool isopen;
 
     // 0:Easy, 1:Medium, 2:Hard
     public int difficulty;
+
+    // 1,2,3
+    public float speed = 1.0f;
     // TODO
     public bool isRandom;
     // 0:1mn, 1:2mn, 2:3mn 
@@ -22,6 +25,8 @@ public class MenuHandler : MonoBehaviour {
     public bool[] letterSizes;
     // 0:Woman, 1:Man
     public int voice;
+
+    public Result[] gameResults =  new Result[29];
 
 /*
     0 = Group E, L, A, T
@@ -46,15 +51,28 @@ public class MenuHandler : MonoBehaviour {
         DontDestroyOnLoad(gameObject);
     }
 
-    public void loadScene() {
+    void Start() {
+        // Create the result array where score will be recorded.
+        for (int index = 0; index < gameResults.Length; index++) {
+            gameResults[index] = new Result();
+        }
+            
+    }
 
-        if (1 == SceneManager.GetActiveScene().buildIndex)
-        {
+    public void loadScene() {
+        
+
+        if (1 == SceneManager.GetActiveScene().buildIndex){
             // Open start menu
-            SceneManager.LoadScene(0);
+            StartCoroutine("endGame");  
         }
         else if (0 == SceneManager.GetActiveScene().buildIndex) {
+            // Reset the previous result array for the next game
+            for (int index = 0; index < gameResults.Length; index++)
+                gameResults[index].reset();
+
             // Open game
+            StartCoroutine(changeVRSetting(true));
             SceneManager.LoadScene(1);
         }
     }
@@ -70,8 +88,9 @@ public class MenuHandler : MonoBehaviour {
                     difficulty = index;
                 }
                 break;
-            case "Rastgele": {
-                    isRandom = !isRandom;
+            case "Hiz": {
+                    Debug.Log("Speed is updated from " + speed + "to " + index);
+                    speed = index;
                 }
                 break;
             case "Sure": {
@@ -111,4 +130,70 @@ public class MenuHandler : MonoBehaviour {
 
     }
 
+    private IEnumerator endGame() {
+
+        Debug.Log("MenuHandler_endGame_End Request");
+        // Find UI canvas to disable it
+        GameObject uiCanvas = GameObject.Find("UICanvas");
+
+        if (uiCanvas == null) {
+            Debug.Log("MenuHandler_endGame_UICAnvas is null!");
+            yield return null;
+        }
+        // Take UIHandler script
+        UIManager uiManagerScript = uiCanvas.GetComponent<UIManager>();
+
+        if (uiManagerScript == null) {
+            Debug.Log("MenuHandler_endGame_UIManager script is null!");
+            yield return null;
+        }
+        // Ring the bells
+        endBell();
+        // Wait for the final letters to fall
+        yield return new WaitForSeconds(2.0f);
+        // Disable UI elements
+        uiManagerScript.endScene();
+
+        yield return new WaitForSeconds(10.0f);
+        // Load start menu
+
+        yield return changeVRSetting(false);
+        SceneManager.LoadScene(0);
+    }
+
+    // TODO find ringing bell audio
+    private void endBell() {
+
+
+        audioHandler = GameObject.Find("AudioManager");
+        
+        if (audioHandler != null && audioHandler.GetComponent<AudioHandler>() == null)
+        {
+            Debug.Log("Audio Handler script is null!");
+            return;
+        }
+        /*
+        int endingSoundIndex = ?;
+        audioHandler.GetComponent<AudioHandler>().play(endingSoundIndex);
+        */
+    }
+
+    private IEnumerator changeVRSetting(bool _input) {
+
+        if (_input) {
+            XRSettings.LoadDeviceByName("cardboard");
+            yield return null;
+            XRSettings.enabled = true;
+        }
+
+        else {
+            XRSettings.LoadDeviceByName("");
+
+            yield return null;
+
+            XRSettings.enabled = false;
+
+        }
+
+    }
 }
