@@ -20,6 +20,7 @@ public class CountDown : MonoBehaviour {
     //public Text counterField;
     // Is here for to be enabled
     public GameObject letterSpawner;
+    public ResultHandler resultHandlerScript;
 
     void Awake () {
         //timer = timeLimit;
@@ -63,19 +64,6 @@ public class CountDown : MonoBehaviour {
             
     }
 
-    /*
-    void updateCounter() {
-        counterField.text = ((int)timer).ToString("00");
-        if (counterField.text == "00")
-        {
-            timer = gameTime;
-            GetComponent<Text>().enabled = false;
-            letterSpawner.gameObject.SetActive(true);
-            isGameOn = true;
-        }
-    }
-    */
-
     void updateGameClock() {
         // update Time bar
         UIManagerScript.timer = timer;
@@ -85,8 +73,11 @@ public class CountDown : MonoBehaviour {
             isGameFinished = true;
             // Stop letter spawner
             letterSpawner.gameObject.SetActive(false);
+            // Display results
+            resultHandlerScript.displayResults();
+
             // Load start menu
-            menuHandlerScript.loadScene();
+            //menuHandlerScript.loadScene();
         }
     }
 

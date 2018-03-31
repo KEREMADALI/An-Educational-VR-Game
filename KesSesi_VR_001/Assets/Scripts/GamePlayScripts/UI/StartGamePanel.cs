@@ -19,6 +19,8 @@ public class StartGamePanel : MonoBehaviour {
         GameObject timerCircle = GameObject.Find("TimerCircle");
         if (timerCircle != null)
             progressBarHandlerScript = timerCircle.GetComponent<GazeImageHandler>();
+
+
     }
 	
 	// Update is called once per frame
@@ -28,16 +30,44 @@ public class StartGamePanel : MonoBehaviour {
             progressBarHandlerScript.updateProgressBar(timer, timerLimit);
 
         if (timer > timerLimit){
-            if (startOrBack)
-            {
-                /*Start Game*/
-                UICanvas.SetActive(true);
-                gameObject.SetActive(false);
+            if (startOrBack){
+                startGame();
             }
             else {
-                /*Back to the menu*/
+                returnBackToMainMenu(); 
             }
         }
+    }
+
+    private void startGame() {
+        resetTimer();
+        UICanvas.SetActive(true);
+        UIManager uiManagerScript = UICanvas.GetComponent<UIManager>();
+        if (uiManagerScript != null)
+            uiManagerScript.startScene();
+
+        gameObject.SetActive(false);
+    }
+
+    private void returnBackToMainMenu() {
+        resetTimer();
+        GameObject menuHandlerObject = GameObject.Find("MenuHandler");
+        if (menuHandlerObject == null)
+        {
+            Debug.Log("StartGamePanel_returnBackToMainMenu_MenuHandler object is null!");
+            return;
+        }
+
+        MenuHandler menuHandlerScript = menuHandlerObject.GetComponent<MenuHandler>();
+        if (menuHandlerScript == null)
+        {
+            Debug.Log("StartGamePanel_returnBackToMainMenu_MenuHandler script is null!");
+            return;
+        }
+
+        UICanvas.SetActive(true);
+        menuHandlerScript.loadScene();
+        gameObject.SetActive(false);
     }
 
     public void resetTimer(){

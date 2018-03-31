@@ -26,17 +26,17 @@ public class MenuHandler : MonoBehaviour {
     // 0:Woman, 1:Man
     public int voice;
 
-    public Result[] gameResults =  new Result[29];
+    public Result[] finalGameResults = new Result[29];
 
-/*
-    0 = Group E, L, A, T
-    1 = Group İ, N, O, R
-    2 = Group M, U, K, I
-    3 = Group Y, S, D, Ö
-    4 = Group B, Ü, Ş, Z
-    5 = Group Ç, G, C, P
-    6 = Group H, Ğ, V, F, J
-*/
+    /*
+        0 = Group E, L, A, T
+        1 = Group İ, N, O, R
+        2 = Group M, U, K, I
+        3 = Group Y, S, D, Ö
+        4 = Group B, Ü, Ş, Z
+        5 = Group Ç, G, C, P
+        6 = Group H, Ğ, V, F, J
+    */
     public bool[] activeLetterGroups = new bool[7];
 
     void Awake(){
@@ -53,8 +53,8 @@ public class MenuHandler : MonoBehaviour {
 
     void Start() {
         // Create the result array where score will be recorded.
-        for (int index = 0; index < gameResults.Length; index++) {
-            gameResults[index] = new Result();
+        for (int index = 0; index < finalGameResults.Length; index++) {
+            finalGameResults[index] = new Result(index);
         }
             
     }
@@ -68,8 +68,8 @@ public class MenuHandler : MonoBehaviour {
         }
         else if (0 == SceneManager.GetActiveScene().buildIndex) {
             // Reset the previous result array for the next game
-            for (int index = 0; index < gameResults.Length; index++)
-                gameResults[index].reset();
+            for (int index = 0; index < finalGameResults.Length; index++)
+                finalGameResults[index].reset();
 
             // Open game
             StartCoroutine("startGame");
@@ -154,11 +154,11 @@ public class MenuHandler : MonoBehaviour {
         // Ring the bells
         endBell();
         // Wait for the final letters to fall
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(1.0f);
         // Disable UI elements
         uiManagerScript.endScene();
 
-        yield return new WaitForSeconds(10.0f);
+        yield return new WaitForSeconds(8.0f);
         // Load start menu
 
         yield return changeVRSetting(false);

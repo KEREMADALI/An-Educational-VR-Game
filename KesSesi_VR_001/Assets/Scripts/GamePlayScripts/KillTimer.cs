@@ -18,7 +18,7 @@ public class KillTimer : MonoBehaviour {
     #region PrivateVariables
 
     private float timerLimit = 1f;
-    private MenuHandler menuHandlerScript;
+    private ResultHandler resultHandlerScript;
     private GazeImageHandler progressBarHandlerScript;
 
     #endregion
@@ -26,17 +26,17 @@ public class KillTimer : MonoBehaviour {
     #region Public Functions
 
     void Start() {
-        GameObject menuHandlerObject = GameObject.Find("MenuHandler");
-        if (menuHandlerObject == null)
+        GameObject resultHandlerObject = GameObject.Find("ResultHandler");
+        if (resultHandlerObject == null)
         {
-            Debug.Log("KillTimer_Start_MenuHandler object is null!_KillTimer");
+            Debug.Log("KillTimer_Start_ResultHandler object is null!_KillTimer");
             return;
         }
 
-        menuHandlerScript = menuHandlerObject.GetComponent<MenuHandler>();
-        if (menuHandlerScript == null)
+        resultHandlerScript = resultHandlerObject.GetComponent<ResultHandler>();
+        if (resultHandlerScript == null)
         {
-            Debug.Log("KillTimer_Start_MenuHandler script is null!");
+            Debug.Log("KillTimer_Start_ResultHandler script is null!");
             return;
         }
 
@@ -55,7 +55,7 @@ public class KillTimer : MonoBehaviour {
             // Might be useless due to it is also called with the pointerexit trigger should be checked
             resetTimer();
             // This letter is dead recalculate the point
-            informCalculator();
+            informCalculatorAndUpdateResult();
             // Explode the letter
             sliceLetter();     
         }
@@ -87,23 +87,18 @@ public class KillTimer : MonoBehaviour {
 
 
     //Calculates the points
-    private void informCalculator()
-    {
-        if (killable)
-        {
+    private void informCalculatorAndUpdateResult(){
+        if (killable){
             // Add points to the stars
             UIManager.score = UIManager.score + 2;
-            // Record hit details
-            menuHandlerScript.gameResults[targetIndex].hit();
         }
-        else
-        {
+        else{
             // Substract points from the stars
             if(UIManager.score > 0)
-            UIManager.score = UIManager.score - 2;
-            // Record hit details
-            menuHandlerScript.gameResults[targetIndex].miss();
+                UIManager.score = UIManager.score - 2;
         }
+        // Update hit details
+        resultHandlerScript.updateResultsList(targetIndex, killable);
     }
 
     #endregion

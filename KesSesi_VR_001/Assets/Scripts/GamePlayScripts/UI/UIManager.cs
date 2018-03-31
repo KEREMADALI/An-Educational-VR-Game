@@ -9,24 +9,26 @@ public class UIManager : MonoBehaviour {
     public GameObject wavingFace;
 
     public GameObject PlayerCanvas;
+    public GameObject stars;
     public GameObject crossHair;
 
     public static int score;
     public float timer;
 
-    // Useless right now
+    public void startScene() {
+        // Enable timeBar
+        if (timeBar != null && timeBar.gameObject != null)
+            timeBar.gameObject.SetActive(true);
+
+        // Enable stars
+        if (stars != null)
+            stars.SetActive(true);   
+    }
+
     public void endScene() {
         // Disable timeBar
         if(timeBar != null && timeBar.gameObject != null)
             timeBar.gameObject.SetActive(false);
-
-        // Disable GazeTimer
-        if (PlayerCanvas != null)
-            PlayerCanvas.SetActive(false);
-
-        // Disable CrossHair
-        if (crossHair != null)
-            crossHair.SetActive(false);
 
         // Enable Waving Face
         if(wavingFace != null)

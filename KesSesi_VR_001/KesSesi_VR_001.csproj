@@ -389,6 +389,7 @@
     <Compile Include="Assets\Scripts\GamePlayScripts\UI\GazeImageHandler.cs" />
     <Compile Include="Assets\Scripts\GamePlayScripts\UI\GUIArrows.cs" />
     <Compile Include="Assets\Scripts\GamePlayScripts\UI\LookAtCamera.cs" />
+    <Compile Include="Assets\Scripts\GamePlayScripts\UI\ResultHandler.cs" />
     <Compile Include="Assets\Scripts\GamePlayScripts\UI\ScoreCalculator.cs" />
     <Compile Include="Assets\Scripts\GamePlayScripts\UI\SetCrosshair.cs" />
     <Compile Include="Assets\Scripts\GamePlayScripts\UI\StartGamePanel.cs" />
