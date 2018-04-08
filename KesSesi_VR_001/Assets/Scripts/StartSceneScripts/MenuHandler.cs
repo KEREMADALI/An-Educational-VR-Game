@@ -54,6 +54,8 @@ public class MenuHandler : MonoBehaviour {
     }
 
     void Start() {
+        FindObjectOfType<AudioHandler>().playOrStop(30);
+
         // Create the result array where score will be recorded.
         for (int index = 0; index < finalGameResults.Length; index++) {
             finalGameResults[index] = new Result(index);
@@ -133,6 +135,8 @@ public class MenuHandler : MonoBehaviour {
 
     private IEnumerator startGame() {
         yield return changeVRSetting(true);
+        FindObjectOfType<AudioHandler>().playOrStop(30);
+        FindObjectOfType<AudioHandler>().playOrStop(33);
         SceneManager.LoadScene(1);
     }
 
@@ -154,7 +158,8 @@ public class MenuHandler : MonoBehaviour {
             yield return null;
         }
         // Ring the bells
-        endBell();
+        FindObjectOfType<AudioHandler>().playOrStop(31);
+
         // Wait for the final letters to fall
         yield return new WaitForSeconds(1.0f);
         // Disable UI elements
@@ -162,27 +167,12 @@ public class MenuHandler : MonoBehaviour {
 
         yield return new WaitForSeconds(8.0f);
         // Load start menu
-
+        FindObjectOfType<AudioHandler>().playOrStop(31);
+        FindObjectOfType<AudioHandler>().playOrStop(30);
         yield return changeVRSetting(false);
         SceneManager.LoadScene(0);
     }
 
-    // TODO find ringing bell audio
-    private void endBell() {
-
-
-        audioHandler = GameObject.Find("AudioManager");
-        
-        if (audioHandler != null && audioHandler.GetComponent<AudioHandler>() == null)
-        {
-            Debug.Log("Audio Handler script is null!");
-            return;
-        }
-        /*
-        int endingSoundIndex = ?;
-        audioHandler.GetComponent<AudioHandler>().play(endingSoundIndex);
-        */
-    }
 
     private IEnumerator changeVRSetting(bool _input) {
 

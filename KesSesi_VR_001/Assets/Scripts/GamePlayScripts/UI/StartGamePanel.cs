@@ -14,7 +14,7 @@ public class StartGamePanel : MonoBehaviour {
     public ResultHandler resultHandlerScript;
 
     // Use this for initialization
-    void Start () {
+    private void Start () {
         timer = 0.0f;
 
         GameObject timerCircle = GameObject.Find("TimerCircle");
@@ -25,12 +25,13 @@ public class StartGamePanel : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	void Update () {
+	private void Update () {
         timer += Time.deltaTime;
         if(progressBarHandlerScript != null)
             progressBarHandlerScript.updateProgressBar(timer, timerLimit);
 
         if (timer > timerLimit){
+            FindObjectOfType<AudioHandler>().playOrStop(33);
             resultHandlerScript.uploadResults();
             if (startOrBack){
                 startGame();

@@ -2601,6 +2601,226 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 620772621}
+--- !u!1 &627117593
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 1161695566321244, guid: 05e52c2fcb4c3734b8ff5283199a1119,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 627117595}
+  - component: {fileID: 627117594}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &627117594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114980723466591570, guid: 05e52c2fcb4c3734b8ff5283199a1119,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 627117593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 835ff0b505a54494dac6c8dbbfc52bca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volume: 0.3
+  sounds:
+  - clip: {fileID: 8300000, guid: 7a44408fb802736499a64a32a44686a0, type: 3}
+    name: A
+    volume: 1
+    loop: 0
+    audioSource: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 616414fbaa39d1a4782a0622506681c5, type: 3}
+    name: B
+    volume: 1
+    loop: 0
+    audioSource: {fileID: 0}
+  - clip: {fileID: 8300000, guid: c3a8f23e35a75fc4995b9ca329b6556f, type: 3}
+    name: C
+    volume: 1
+    loop: 0
+    audioSource: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 1aaf69ecb949f3b4f9827badc924d1fa, type: 3}
+    name: "\xC7"
+    volume: 1
+    loop: 0
+    audioSource: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 42d0098f2ee2cab41a63bcecffba9940, type: 3}
+    name: D
+    volume: 1
+    loop: 0
+    audioSource: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 794c0727838d66e4c9c80a5ed94ab699, type: 3}
+    name: E
+    volume: 0
+    loop: 0
+    audioSource: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 5abba8d47811bbe44b11169c76cbc5a9, type: 3}
+    name: F
+    volume: 0
+    loop: 0
+    audioSource: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 379f19b2b1cada945b663107fcc4ad49, type: 3}
+    name: G
+    volume: 0
+    loop: 0
+    audioSource: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 3ffaac304f892394eb03c38b9eafd529, type: 3}
+    name: "\u011E"
+    volume: 0
+    loop: 0
+    audioSource: {fileID: 0}
+  - clip: {fileID: 8300000, guid: a58ebc410c9d78a49a10afb66a9e44a4, type: 3}
+    name: H
+    volume: 0
+    loop: 0
+    audioSource: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 2c355e88e0389d748ba3d6a8409c134a, type: 3}
+    name: I
+    volume: 0
+    loop: 0
+    audioSource: {fileID: 0}
+  - clip: {fileID: 8300000, guid: b4b0a01f3ce0bdf48bc352a068adeb8a, type: 3}
+    name: "\u0130"
+    volume: 0
+    loop: 0
+    audioSource: {fileID: 0}
+  - clip: {fileID: 8300000, guid: cab4f27b7c024db4f90b5dbc5958230d, type: 3}
+    name: J
+    volume: 0
+    loop: 0
+    audioSource: {fileID: 0}
+  - clip: {fileID: 8300000, guid: f69ef0f4657d44246879bd2ac653f58c, type: 3}
+    name: K
+    volume: 0
+    loop: 0
+    audioSource: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 60b00b7ead4ffe741901ead9c3a1bfd1, type: 3}
+    name: L
+    volume: 0
+    loop: 0
+    audioSource: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 7aa54e1990bf4624d8af6df4738047e1, type: 3}
+    name: M
+    volume: 0
+    loop: 0
+    audioSource: {fileID: 0}
+  - clip: {fileID: 8300000, guid: ac0254beca6a58b4e818162b64fa8d7b, type: 3}
+    name: N
+    volume: 0
+    loop: 0
+    audioSource: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 509d9132ab90d2f409e31a09ca7e4483, type: 3}
+    name: O
+    volume: 0
+    loop: 0
+    audioSource: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 01310e5b9e58ed04189f8de7e22947ca, type: 3}
+    name: "\xD6"
+    volume: 0
+    loop: 0
+    audioSource: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 42e665180e32b0b4ca55cb7ca4d1f6f5, type: 3}
+    name: P
+    volume: 0
+    loop: 0
+    audioSource: {fileID: 0}
+  - clip: {fileID: 8300000, guid: b6abd17abc999f046904053d207144de, type: 3}
+    name: R
+    volume: 0
+    loop: 0
+    audioSource: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 93ce4d64804fe9745a4cc03c012ae048, type: 3}
+    name: S
+    volume: 0
+    loop: 0
+    audioSource: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 34f60fb62dcf8ce4b8f79ec96278d6a2, type: 3}
+    name: "\u015E"
+    volume: 0
+    loop: 0
+    audioSource: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 440680aa17930004ba52a7b91acc5f50, type: 3}
+    name: T
+    volume: 0
+    loop: 0
+    audioSource: {fileID: 0}
+  - clip: {fileID: 8300000, guid: d2737f0295dbe6843bc749da31840fc9, type: 3}
+    name: U
+    volume: 0
+    loop: 0
+    audioSource: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 747b80c4303e7014b89d2eccb25fc5b4, type: 3}
+    name: "\xDC"
+    volume: 0
+    loop: 0
+    audioSource: {fileID: 0}
+  - clip: {fileID: 8300000, guid: f40ad2bec9984b64d9f7b4a73673c483, type: 3}
+    name: V
+    volume: 0
+    loop: 0
+    audioSource: {fileID: 0}
+  - clip: {fileID: 8300000, guid: c93ffd93cca391949b18d9ba75dcaa95, type: 3}
+    name: Y
+    volume: 0
+    loop: 0
+    audioSource: {fileID: 0}
+  - clip: {fileID: 8300000, guid: a4e78ffc1e2808445a176ae9dfd4ee20, type: 3}
+    name: Z
+    volume: 0
+    loop: 0
+    audioSource: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 181bb029b80bdfc4ca526ef42b815e4f, type: 3}
+    name: SpawnSound
+    volume: 0
+    loop: 0
+    audioSource: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 4b49ef3804dbf1e49835a15fbc15ce97, type: 3}
+    name: MainMenu
+    volume: 0
+    loop: 1
+    audioSource: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 0604ea46f9bd99445a6cbf1f7495e7b8, type: 3}
+    name: FeedBack
+    volume: 0
+    loop: 1
+    audioSource: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 1e5ce37ba34a2434b8ef36b6f9a41868, type: 3}
+    name: CorrectSound
+    volume: 1
+    loop: 0
+    audioSource: {fileID: 0}
+  - clip: {fileID: 8300000, guid: cb84703064b762a4686801dbee742b14, type: 3}
+    name: Pause
+    volume: 0.5
+    loop: 1
+    audioSource: {fileID: 0}
+  - clip: {fileID: 8300000, guid: 01b2d84849179e64f8dd2a9a136199be, type: 3}
+    name: TickTock
+    volume: 0.5
+    loop: 1
+    audioSource: {fileID: 0}
+--- !u!4 &627117595
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 4229404413053070, guid: 05e52c2fcb4c3734b8ff5283199a1119,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 627117593}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.41210026, z: -1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &631570363
 GameObject:
   m_ObjectHideFlags: 0

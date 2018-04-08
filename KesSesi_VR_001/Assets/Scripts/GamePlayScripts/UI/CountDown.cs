@@ -5,6 +5,7 @@ public class CountDown : MonoBehaviour {
 
     private MenuHandler menuHandlerScript;
     private bool isGameFinished = false;
+    private bool isPlaying = false;
 
     public UIManager UIManagerScript;
     public float timer;
@@ -57,6 +58,9 @@ public class CountDown : MonoBehaviour {
     private void updateGameClock() {
 
         if (timer < 0.5f) {
+            isPlaying = false;
+            FindObjectOfType<AudioHandler>().playOrStop(34);
+
             // Reset game time for the next game (For replay option)
             timer = gameTime;
             // Avoids multiple end requests
@@ -70,6 +74,11 @@ public class CountDown : MonoBehaviour {
             playDecisionPanel.gameObject.SetActive(true);
             // Disable its script it should be enabled with its own trigger
             playDecisionPanel.GetComponent<StartGamePanel>().enabled = false;
+            FindObjectOfType<AudioHandler>().playOrStop(33);
+        }
+        else if (timer < 3.0f && !isPlaying){
+            isPlaying = true;
+            FindObjectOfType<AudioHandler>().playOrStop(34);
         }
         // Update Time bar
         UIManagerScript.timer = timer;

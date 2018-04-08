@@ -46,8 +46,12 @@ public class DetonationController : MonoBehaviour {
             temp = Instantiate(pref.gameObject, pos, rot);
             // Make particles child of the object to destroy all of them at once
             temp.transform.parent = transform;
-            // Set ParentColor
+            // Set Color of the particle same with the original letter
             temp.GetComponent<Renderer>().material.SetColor("_Color", color);
+            // Paint particle's child if it exists
+            if(temp.transform.childCount != 0)
+                temp.transform.GetChild(0).GetComponent<Renderer>().material.SetColor("_Color", color);
+
             // Scale particles as small versions of the original object
             temp.transform.localScale = new Vector3(
                 temp.transform.localScale.x * particleScale, 

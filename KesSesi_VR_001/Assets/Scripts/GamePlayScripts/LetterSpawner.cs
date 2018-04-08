@@ -9,7 +9,6 @@ public class LetterSpawner : MonoBehaviour {
     #region Public Variables
     public GameObject letter;
     public LetterGroupHandler letterGroupHandler;
-    public AudioHandler audioHandler;
     #endregion
 
     #region Private Variables
@@ -19,11 +18,19 @@ public class LetterSpawner : MonoBehaviour {
     private float drag = 0.5f;
     private GameObject targetObject;
     private bool isTargetDead = false;
+    private AudioHandler audioHandler;
     #endregion
 
     void Awake() {
        setGameSpeed();
        setPhysicalSettingsOfLetters();
+
+        GameObject audioManager = GameObject.Find("AudioManager");
+        if (audioManager == null) {
+            Debug.Log(this.name + "_Awake_AudioManager is null");
+            return;
+        }
+        audioHandler = audioManager.GetComponent<AudioHandler>();
     }
 
 
@@ -136,7 +143,7 @@ public class LetterSpawner : MonoBehaviour {
         // Throws all of the array
         for (int i = 0; i < randomizedArray.Length; i++)
         {
-            // Instantiaye letter
+            // Instantiate letter
             throwable = Instantiate(letter.transform.GetChild(randomizedArray[i]).gameObject);
             // Add related components for the letter
             addLetterScripts(ref throwable, randomizedArray[i]);
@@ -168,6 +175,8 @@ public class LetterSpawner : MonoBehaviour {
             throwable.transform.position = pos;
             // Randomize rotation
             throwable.transform.rotation = Quaternion.Euler(Random.Range(-10.0f, 10.0f),Random.Range(170.0f, 190.0f), Random.Range(-30.0f,30.0f));
+
+            sayWhatToCut(29);
 
             // This section creates random throwing variables. Prevents the objects being thrown away from the map
             if (pos.x < 0f)
@@ -231,10 +240,10 @@ public class LetterSpawner : MonoBehaviour {
 
     //TODO vocalize what to cut then wait for 1 second
     private void sayWhatToCut(int indexToVocalize){
-        if (audioHandler.GetComponent<AudioHandler>() == null) {
+        if (audioHandler == null) {
             Debug.Log("Audio Handler script is null!");
             return;
         }
-         audioHandler.GetComponent<AudioHandler>().play(indexToVocalize); 
+         audioHandler.GetComponent<AudioHandler>().playOrStop(indexToVocalize); 
     }
 }

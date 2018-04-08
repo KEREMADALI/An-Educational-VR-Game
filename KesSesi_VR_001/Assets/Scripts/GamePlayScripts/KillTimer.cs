@@ -91,6 +91,7 @@ public class KillTimer : MonoBehaviour {
         if (killable){
             // Add points to the stars
             UIManager.score = UIManager.score + 2;
+            FindObjectOfType<AudioHandler>().playOrStop(32);
         }
         else{
             // Substract points from the stars
