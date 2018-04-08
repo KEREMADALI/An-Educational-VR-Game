@@ -11,6 +11,7 @@ public class StartGamePanel : MonoBehaviour {
     // true: Start, false: Back
     public bool startOrBack;
     public GameObject UICanvas;
+    public ResultHandler resultHandlerScript;
 
     // Use this for initialization
     void Start () {
@@ -30,6 +31,7 @@ public class StartGamePanel : MonoBehaviour {
             progressBarHandlerScript.updateProgressBar(timer, timerLimit);
 
         if (timer > timerLimit){
+            resultHandlerScript.uploadResults();
             if (startOrBack){
                 startGame();
             }

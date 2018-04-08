@@ -2125,7 +2125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70334fbf173333f459e17fdcd13dabca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  letterResult: {fileID: 223771699593664622, guid: 27778c525154f1646bdf75d258634500,
+  letterResult: {fileID: 223087466423232204, guid: 27778c525154f1646bdf75d258634500,
     type: 2}
   letter: {fileID: 1492296796442600, guid: eaf7630c2f9b89f40b79424d6dec2cab, type: 2}
   tick: {fileID: 21300000, guid: f79602da6ca5b3e47a6d59e7c36c58d2, type: 3}
@@ -2242,6 +2242,7 @@ MonoBehaviour:
   gameTime: 0
   letterSpawner: {fileID: 757305292}
   resultHandlerScript: {fileID: 1768855940}
+  playDecisionPanel: {fileID: 1783998199}
 --- !u!1 &1783568572
 GameObject:
   m_ObjectHideFlags: 0
@@ -2365,7 +2366,7 @@ GameObject:
   - component: {fileID: 1783998201}
   - component: {fileID: 1783998203}
   m_Layer: 5
-  m_Name: FirstPanelOnStart
+  m_Name: PlayDecisionPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2379,7 +2380,7 @@ RectTransform:
   m_GameObject: {fileID: 1783998199}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_Children:
   - {fileID: 1475382434}
   - {fileID: 1826086738}
@@ -2438,6 +2439,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startOrBack: 0
   UICanvas: {fileID: 544930337}
+  resultHandlerScript: {fileID: 1768855940}
 --- !u!1 &1826086737
 GameObject:
   m_ObjectHideFlags: 0

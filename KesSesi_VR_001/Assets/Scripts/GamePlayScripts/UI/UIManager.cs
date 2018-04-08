@@ -17,12 +17,17 @@ public class UIManager : MonoBehaviour {
 
     public void startScene() {
         // Enable timeBar
-        if (timeBar != null && timeBar.gameObject != null)
+        if (timeBar != null && timeBar.gameObject != null) {
             timeBar.gameObject.SetActive(true);
+            timeBar.GetComponent<CountDown>().startGame();
+        }
 
         // Enable stars
         if (stars != null)
-            stars.SetActive(true);   
+            stars.SetActive(true);
+
+        // Reset Score
+        score = 0; 
     }
 
     public void endScene() {

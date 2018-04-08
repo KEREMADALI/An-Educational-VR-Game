@@ -3,30 +3,20 @@ using UnityEngine.UI;
 
 public class CountDown : MonoBehaviour {
 
-
-    private bool isGameOn = false;
-    private bool isGameFinished = false;
     private MenuHandler menuHandlerScript;
-
+    private bool isGameFinished = false;
 
     public UIManager UIManagerScript;
     public float timer;
     // Time limit of the game
     [HideInInspector] 
     public float gameTime;
-    // Time limit of the counter
-    //public float timeLimit;
-    // Text field of the counter of the first screen
-    //public Text counterField;
     // Is here for to be enabled
     public GameObject letterSpawner;
     public ResultHandler resultHandlerScript;
+    public GameObject playDecisionPanel;
 
-    void Awake () {
-        //timer = timeLimit;
-        
-        letterSpawner.gameObject.SetActive(true);
-
+    private void Awake () {
         // Take the time limit for the game
         GameObject menuHandlerObject = GameObject.Find("MenuHandler");
         if (menuHandlerObject == null){
@@ -39,6 +29,22 @@ public class CountDown : MonoBehaviour {
             Debug.Log("MenuHandler script is null! Clock update failed.");
             return;
         }
+        startGame();
+    }
+	
+	// Update is called once per frame
+	private void Update () {
+        if (!isGameFinished) {
+            timer -= Time.deltaTime;
+            updateGameClock();
+        }        
+    }
+
+    public void startGame() {
+        isGameFinished = false;
+
+        letterSpawner.gameObject.SetActive(true);
+
         // TODO Multiplies with 20 for debug purpose
         //60sec * Time Variable From Settings Menu
         gameTime = 20 * (menuHandlerScript.time + 1);
@@ -47,38 +53,26 @@ public class CountDown : MonoBehaviour {
         // Initial timer value for the UI element
         UIManagerScript.timer = gameTime;
     }
-	
-	// Update is called once per frame
-	void Update () {
-        timer -= Time.deltaTime;
-        /*
-        if (!isGameOn)
-            updateCounter();
-        else if(!isGameFinished) {
-            updateGameClock();
-        }
-        */
-        if (!isGameFinished) {
-            updateGameClock();
-        }
-            
-    }
 
-    void updateGameClock() {
-        // update Time bar
-        UIManagerScript.timer = timer;
-        // TODO Update the clock on the screen
+    private void updateGameClock() {
+
         if (timer < 0.5f) {
-            // TODO not using this variable
+            // Reset game time for the next game (For replay option)
+            timer = gameTime;
+            // Avoids multiple end requests
             isGameFinished = true;
             // Stop letter spawner
             letterSpawner.gameObject.SetActive(false);
             // Display results
             resultHandlerScript.displayResults();
 
-            // Load start menu
-            //menuHandlerScript.loadScene();
+            // Open go/nogo decision menu
+            playDecisionPanel.gameObject.SetActive(true);
+            // Disable its script it should be enabled with its own trigger
+            playDecisionPanel.GetComponent<StartGamePanel>().enabled = false;
         }
+        // Update Time bar
+        UIManagerScript.timer = timer;
     }
 
 }

@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.XR;
@@ -199,5 +201,17 @@ public class MenuHandler : MonoBehaviour {
 
         }
 
+    }
+
+    public void updateGameResults(Dictionary<int, Result> gameResults){
+        foreach (KeyValuePair<int, Result> temp in gameResults){
+            // Take the id of the letter
+            int id = temp.Value.getId();
+
+            for (int i = 0; i < temp.Value.getResultOrder().Count; i++) {
+                bool value = temp.Value.getResultOrder()[i];
+                finalGameResults[id].update(value);
+            }
+        }
     }
 }

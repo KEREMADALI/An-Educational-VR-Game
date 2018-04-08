@@ -73,7 +73,7 @@ public class LetterSpawner : MonoBehaviour {
         }
     }
 
-    void Start () {
+    void OnEnable () {
         StartCoroutine(spawner());
     }
 
