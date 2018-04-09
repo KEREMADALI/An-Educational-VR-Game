@@ -46,9 +46,8 @@ public class CountDown : MonoBehaviour {
 
         letterSpawner.gameObject.SetActive(true);
 
-        // TODO Multiplies with 20 for debug purpose
         //60sec * Time Variable From Settings Menu
-        gameTime = 20 * (menuHandlerScript.time + 1);
+        gameTime = 60 * (menuHandlerScript.time + 1);
         timer = gameTime;
 
         // Initial timer value for the UI element

@@ -7,9 +7,14 @@ using UnityEngine.XR;
 
 public class StartMenuHandler : MonoBehaviour {
 
+    private MenuHandler menuHandlerScript;
+
     public Button playButton;
 
-    void Awake() {
+    private int awakeNum = 0;
+
+
+    private void Awake() {
            // Disabling VR mode transferred to MenuHandler
 
         GameObject menuHandlerObject = GameObject.Find("MenuHandler");
@@ -18,7 +23,7 @@ public class StartMenuHandler : MonoBehaviour {
             return;
         }
 
-        MenuHandler menuHandlerScript = menuHandlerObject.GetComponent<MenuHandler>();
+        menuHandlerScript = menuHandlerObject.GetComponent<MenuHandler>();
         if (menuHandlerScript == null)
         {
             Debug.Log("MenuHandler script is null play button trigger can not be added.");
@@ -28,5 +33,11 @@ public class StartMenuHandler : MonoBehaviour {
         playButton.onClick.AddListener(menuHandlerScript.loadScene);
     }
 
-  
+    private void OnEnable() {
+        if (awakeNum == 0)
+            awakeNum++;
+        else
+            menuHandlerScript.save();
+    }
+
 }

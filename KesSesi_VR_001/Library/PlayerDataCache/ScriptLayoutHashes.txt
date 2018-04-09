@@ -127,7 +127,7 @@ bc68edb0af574bf79f9550ead8ebae5c UnityEngine.HoloLens.dll:UnityEngine.Audio.Audi
 463516d5b5fe8e67a0a24c48f2095b04 UnityEngine.HoloLens.dll:UnityEngine.EventSystems.HoloLensInputModule
 c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.SpatialMappingCollider
 45f3431f0103c41611e8d4eec3d439df UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.SpatialMappingRenderer
-f193ba810e2fd13cd9286da1e8c30d92 Assembly-CSharp.dll:.MenuHandler
+610e9112c7e77f83886510a6ec943eb5 Assembly-CSharp.dll:.MenuHandler
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.LookAtCamera
 0df1ace95cc2aedd5b6a88b47ccc1bcd Assembly-CSharp.dll:.AudioHandler
 0d07d19e17c457c88173280a8d2269a8 Assembly-CSharp.dll:.LetterSpawner
@@ -194,3 +194,4 @@ d7621ea40b93ce04b18e3f8afffa19e8 Assembly-CSharp.dll:.SettingsMenuHandler
 b2945430dfd6bbdb5d77043b47bf85e7 Assembly-CSharp.dll:.GvrControllerReticleVisual
 5e73adcb2ad231bc97ba30a2ef5096f8 Assembly-CSharp.dll:.StartMenuHandler
 6ef0791ac829bfadbfc046fb93260ce9 Assembly-CSharp.dll:.ResultHandler
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.StatisticsContentHandler

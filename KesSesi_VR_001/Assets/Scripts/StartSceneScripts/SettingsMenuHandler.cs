@@ -15,7 +15,7 @@ public class SettingsMenuHandler : MonoBehaviour {
     public GameObject[] letterGroupPanels;
 
 
-    void Start()
+    private void Start()
     {
         // Find MenuHandler object for further use
         handler = GameObject.Find("MenuHandler");

@@ -397,8 +397,10 @@
     <Compile Include="Assets\Scripts\GamePlayScripts\UI\UIManager.cs" />
     <Compile Include="Assets\Scripts\NewBehaviourScript.cs" />
     <Compile Include="Assets\Scripts\StartSceneScripts\MenuHandler.cs" />
+    <Compile Include="Assets\Scripts\StartSceneScripts\SaveAndLoad.cs" />
     <Compile Include="Assets\Scripts\StartSceneScripts\SettingsMenuHandler.cs" />
     <Compile Include="Assets\Scripts\StartSceneScripts\StartMenuHandler.cs" />
+    <Compile Include="Assets\Scripts\StartSceneScripts\StatisticsContentHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\BOXOPHOBIC\Skybox - Cubemap Extended\Shaders\Skybox - Cubemap Extended.shader" />
