@@ -17,7 +17,7 @@ public class KillTimer : MonoBehaviour {
 
     #region PrivateVariables
 
-    private float timerLimit = 1f;
+    private float timerLimit = 0.8f;
     private ResultHandler resultHandlerScript;
     private GazeImageHandler progressBarHandlerScript;
 

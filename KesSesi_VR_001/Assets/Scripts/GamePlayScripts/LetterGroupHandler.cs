@@ -56,6 +56,16 @@ public class LetterGroupHandler : MonoBehaviour {
                 activeGroups.Add(tempGroup);
         }
 
+        if (activeGroups.Count > 4) {
+            int extra = activeGroups.Count - 4;
+
+            while (extra > 0) {
+                int index = Random.Range(0 , activeGroups.Count);
+                activeGroups.RemoveAt(index);
+                extra--;
+            }
+        }
+
         Debug.Log("getActiveGroupList is called and the return value was: "+ activeGroups);
         return activeGroups;
     } 

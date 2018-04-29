@@ -5725,31 +5725,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 835ff0b505a54494dac6c8dbbfc52bca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  volume: 0.3
+  volume: 1
   sounds:
   - clip: {fileID: 8300000, guid: 7a44408fb802736499a64a32a44686a0, type: 3}
     name: A
-    volume: 1
+    volume: 0
     loop: 0
     audioSource: {fileID: 0}
   - clip: {fileID: 8300000, guid: 616414fbaa39d1a4782a0622506681c5, type: 3}
     name: B
-    volume: 1
+    volume: 0
     loop: 0
     audioSource: {fileID: 0}
   - clip: {fileID: 8300000, guid: c3a8f23e35a75fc4995b9ca329b6556f, type: 3}
     name: C
-    volume: 1
+    volume: 0
     loop: 0
     audioSource: {fileID: 0}
   - clip: {fileID: 8300000, guid: 1aaf69ecb949f3b4f9827badc924d1fa, type: 3}
     name: "\xC7"
-    volume: 1
+    volume: 0
     loop: 0
     audioSource: {fileID: 0}
   - clip: {fileID: 8300000, guid: 42d0098f2ee2cab41a63bcecffba9940, type: 3}
     name: D
-    volume: 1
+    volume: 0
     loop: 0
     audioSource: {fileID: 0}
   - clip: {fileID: 8300000, guid: 794c0727838d66e4c9c80a5ed94ab699, type: 3}
@@ -15322,7 +15322,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.43137255, g: 0.75686276, b: 0.7647059, a: 0.39215687}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.39215687}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -17614,7 +17614,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.43137255, g: 0.75686276, b: 0.7647059, a: 0.39215687}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.39215687}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:

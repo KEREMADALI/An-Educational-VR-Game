@@ -16,6 +16,7 @@ public class LetterSpawner : MonoBehaviour {
     private float wideness = 2.0f;
     private float upSpeed = 2f;
     private float drag = 0.5f;
+    private float waitTimeBetweenSpawnGroups = 9.5f;
     private GameObject targetObject;
     private bool isTargetDead = false;
     private AudioHandler audioHandler;
@@ -50,11 +51,14 @@ public class LetterSpawner : MonoBehaviour {
             return;
         }
 
+        float gameSpeed = menuHandlerScript.speed;
         // multiplyValue = 2/4; 3/4; 4/4
-        float multiplyValue = (menuHandlerScript.speed + 1.0f) / 4.0f;
+        float multiplyValue = ( gameSpeed+ 1.0f) / 4.0f;
         Physics.gravity = new Vector3( 0.0f, -1.0f * multiplyValue, 0.0f);
 
         upSpeed = Mathf.Sqrt(8 * multiplyValue);
+
+        waitTimeBetweenSpawnGroups = waitTimeBetweenSpawnGroups - (gameSpeed - 1);
                
     }
 
@@ -127,7 +131,7 @@ public class LetterSpawner : MonoBehaviour {
                     StartCoroutine(groupSpawner(soloArray, randomizedArray[targetIndex]));
                 }
                 roundCount++;
-                yield return new WaitForSeconds(10f);
+                yield return new WaitForSeconds(waitTimeBetweenSpawnGroups);
             }
         }
     }
@@ -140,6 +144,7 @@ public class LetterSpawner : MonoBehaviour {
         yield return new WaitForSeconds(1.0f);
 
         GameObject throwable;
+        int pos_x= -10;
         // Throws all of the array
         for (int i = 0; i < randomizedArray.Length; i++)
         {
@@ -170,8 +175,16 @@ public class LetterSpawner : MonoBehaviour {
                 throwable.transform.GetChild(0).GetComponent<Renderer>().material.SetColor("_Color", color);
 
             Rigidbody rb = throwable.GetComponent<Rigidbody>();
-            // Create a random spawn point between -wideness and wideness values
-            Vector3 pos = new Vector3(Mathf.RoundToInt(Random.Range(-wideness, wideness)), 0.15f, 3f); ;
+            // Create a random spawn point different from the previous one between -wideness and wideness
+            int temp_x;
+            do{
+                temp_x = Mathf.RoundToInt(Random.Range(-wideness, wideness));
+            }
+            while (temp_x == pos_x);
+
+            pos_x = temp_x;
+
+            Vector3 pos = new Vector3(pos_x, 0.15f, 3f); ;
             throwable.transform.position = pos;
             // Randomize rotation
             throwable.transform.rotation = Quaternion.Euler(Random.Range(-10.0f, 10.0f),Random.Range(170.0f, 190.0f), Random.Range(-30.0f,30.0f));

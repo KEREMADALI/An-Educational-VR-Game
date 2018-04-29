@@ -13,6 +13,9 @@ public class ResultHandler : MonoBehaviour {
     public GameObject letter;
     public Sprite tick;
     public Sprite cross;
+    public Sprite plus;
+
+    public float defaultPosition;
 
 
     public void displayResults() {
@@ -47,13 +50,18 @@ public class ResultHandler : MonoBehaviour {
             // Sprite that will hold the check or the cross image
             Sprite tmpSprite = new Sprite();
 
-            // Loop every result of the letters but the panel only takes 8 letters (TODO there might be another way, will be considered)
+            // Loop every result of the letters but the panel only takes 8 letters (TODO there might be an another way, will be considered)
             for (int i = 0; i < temp.Value.getResultOrder().Count && i < 8;i++){
                 // Is it correct or false
                 bool isTick = temp.Value.getResultOrder()[i];
                 // Image object
                 GameObject imgObj = new GameObject();
-                if (isTick){
+                if ( i == 7) {
+                    /* Add plus to canvas*/
+                    tmpSprite = plus;
+                    imgObj.name = "Plus";
+                }
+                else if (isTick){
                     /* Add tick to canvas*/
                     tmpSprite = tick;
                     imgObj.name = "Check";   
@@ -72,7 +80,7 @@ public class ResultHandler : MonoBehaviour {
                 }
                 // Enable image
                 img.enabled = true;
-                // Assign spriteto object
+                // Assign sprite to object
                 img.sprite = tmpSprite;
 
                 // Assign parent canvas
@@ -117,12 +125,12 @@ public class ResultHandler : MonoBehaviour {
         // Angle between every result table
         float unitAng = 20.0f;
         // Results start right after go/nogo menu
-        float defaultPosition = 2.2f;
+        /*float*/ defaultPosition = -1 * ((float)gameResults.Count / 2) + 0.5f;//0.0f;//2.2f;
 
         // Set position of the header according to its index value
         Vector3 headerPos = new Vector3();
         headerPos.x = Camera.main.transform.position.x + radius * Mathf.Sin((index + defaultPosition) * unitAng * Mathf.Deg2Rad);
-        headerPos.y = 3.0f;
+        headerPos.y = 4.5f;
         headerPos.z = Camera.main.transform.position.z + radius * Mathf.Cos((index + defaultPosition) * unitAng * Mathf.Deg2Rad);
 
         // Position the content canvas below header
