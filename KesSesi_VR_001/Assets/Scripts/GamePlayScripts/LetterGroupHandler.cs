@@ -44,7 +44,7 @@ public class LetterGroupHandler : MonoBehaviour {
         // Group Ç, G, Z, P
         groups.Add(new LetterGroup(menuHandlerScript.activeLetterGroups[5], new int[] { 3, 7, 28, 19 }));
         // Group H, Ğ, V, F, J
-        groups.Add(new LetterGroup(menuHandlerScript.activeLetterGroups[6], new int[] { 9, 8, 26, 12 }));
+        groups.Add(new LetterGroup(menuHandlerScript.activeLetterGroups[6], new int[] { 9, 8, 26, 6, 12 }));
 	}
 
     // Returns activated group list for the other classes

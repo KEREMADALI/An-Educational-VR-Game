@@ -65,7 +65,8 @@ public class CountDown : MonoBehaviour {
             // Avoids multiple end requests
             isGameFinished = true;
             // Stop letter spawner
-            letterSpawner.gameObject.SetActive(false);
+            //letterSpawner.gameObject.SetActive(false);
+            letterSpawner.GetComponent<LetterSpawner>().finishRound();
             // Display results
             resultHandlerScript.displayResults();
 

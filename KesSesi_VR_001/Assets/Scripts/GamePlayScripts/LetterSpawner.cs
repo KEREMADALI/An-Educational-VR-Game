@@ -16,9 +16,14 @@ public class LetterSpawner : MonoBehaviour {
     private float wideness = 2.0f;
     private float upSpeed = 2f;
     private float drag = 0.5f;
+    private int difficulty = 0;
+
     private float waitTimeBetweenSpawnGroups = 9.5f;
+    private float waitTimeForOneLetter = 7.0f;
+
     private GameObject targetObject;
     private bool isTargetDead = false;
+
     private AudioHandler audioHandler;
     #endregion
 
@@ -52,14 +57,16 @@ public class LetterSpawner : MonoBehaviour {
         }
 
         float gameSpeed = menuHandlerScript.speed;
+        difficulty = menuHandlerScript.difficulty;
         // multiplyValue = 2/4; 3/4; 4/4
-        float multiplyValue = ( gameSpeed+ 1.0f) / 4.0f;
+        float multiplyValue = ( gameSpeed + 1.0f) / 4.0f;
         Physics.gravity = new Vector3( 0.0f, -1.0f * multiplyValue, 0.0f);
 
         upSpeed = Mathf.Sqrt(8 * multiplyValue);
 
-        waitTimeBetweenSpawnGroups = waitTimeBetweenSpawnGroups - (gameSpeed - 1);
-               
+        waitTimeBetweenSpawnGroups = waitTimeBetweenSpawnGroups - (gameSpeed - 1) +  2 * difficulty;
+        waitTimeForOneLetter = waitTimeForOneLetter - (gameSpeed - 1);
+
     }
 
     void setPhysicalSettingsOfLetters() {
@@ -119,25 +126,33 @@ public class LetterSpawner : MonoBehaviour {
             isTargetDead = false;
 
             // Loop until the target object is dead
-            while (!isTargetDead) { 
+            while (!isTargetDead) {
+                float tempWaitTime = 0.0f;
+                // Last letter group includes 5 letters (others include 4) so it needs more seconds
+                if (randomizedArray.Length == 5)
+                    tempWaitTime = 1.5f;
                 // If the user can't hit the target object twice send it alone for the next rounds
                 if (roundCount < 2){
                     // Spawning function
-                    StartCoroutine(groupSpawner(randomizedArray, randomizedArray[targetIndex]));
+                    StartCoroutine(groupSpawner(randomizedArray, randomizedArray[targetIndex], randomizedArray.Length + difficulty));
+                    // Calculated wait time according to game speed and difficulty
+                    tempWaitTime = tempWaitTime + waitTimeBetweenSpawnGroups;
                 }
                 else {
                     // Create an array that just has the target object 
                     int[] soloArray = {randomizedArray[targetIndex] };
-                    StartCoroutine(groupSpawner(soloArray, randomizedArray[targetIndex]));
+                    StartCoroutine(groupSpawner(soloArray, randomizedArray[targetIndex], 1));
+                    // Wait time for one letter
+                    tempWaitTime =  tempWaitTime + waitTimeForOneLetter;
                 }
                 roundCount++;
-                yield return new WaitForSeconds(waitTimeBetweenSpawnGroups);
+                yield return new WaitForSeconds(tempWaitTime);
             }
         }
     }
 
     // Takes the randomized version of the selected group and then spawns it with random timing and velocities
-    IEnumerator groupSpawner(int[] randomizedArray, int target)
+    IEnumerator groupSpawner(int[] randomizedArray, int target, int length)
     {
         // Vocalize the targetted letter
         sayWhatToCut(target);
@@ -146,16 +161,28 @@ public class LetterSpawner : MonoBehaviour {
         GameObject throwable;
         int pos_x= -10;
         // Throws all of the array
-        for (int i = 0; i < randomizedArray.Length; i++)
-        {
-            // Instantiate letter
-            throwable = Instantiate(letter.transform.GetChild(randomizedArray[i]).gameObject);
+        for (int i = 0; i < length; i++){
+            int moddedIndex = i;
+            // When difficulty increases, loop takes a second turn
+            if (moddedIndex >= randomizedArray.Length) {
+                // Start from 0 again
+                moddedIndex = moddedIndex % randomizedArray.Length;
+                // Target should be sent only once in a round
+                if (randomizedArray[moddedIndex] == target) {
+                    // Give one more turn for the loop
+                    length++;
+                    continue;
+                }
+            }
+
+            // Instantiate letter ( parent is this class for to kill them easily at the end)
+            throwable = Instantiate(letter.transform.GetChild(randomizedArray[moddedIndex]).gameObject,transform);
             // Add related components for the letter
-            addLetterScripts(ref throwable, randomizedArray[i]);
+            addLetterScripts(ref throwable, randomizedArray[moddedIndex]);
             // Add Event Triggers
             addLetterEvenTriggers(ref throwable);
             // Selected target is being marked as killable so it will add points in case of death
-            if (randomizedArray[i] == target)
+            if (randomizedArray[moddedIndex] == target)
             {
                 targetObject = throwable;
                 throwable.GetComponent<KillTimer>().killable = true;           
@@ -258,5 +285,15 @@ public class LetterSpawner : MonoBehaviour {
             return;
         }
          audioHandler.GetComponent<AudioHandler>().playOrStop(indexToVocalize); 
+    }
+
+    // Cleans up the last letters from the scene end disables itself
+    public void finishRound() {
+        // Destroy all the existing child letters
+        foreach (Transform child in transform) {
+            Destroy(child.gameObject);
+        }
+        // Disable itself
+        gameObject.SetActive(false);
     }
 }
