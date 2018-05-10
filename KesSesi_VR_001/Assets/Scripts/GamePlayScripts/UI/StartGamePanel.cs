@@ -13,7 +13,6 @@ public class StartGamePanel : MonoBehaviour {
     public GameObject UICanvas;
     public ResultHandler resultHandlerScript;
 
-    // Use this for initialization
     private void Start () {
         timer = 0.0f;
 
@@ -24,7 +23,6 @@ public class StartGamePanel : MonoBehaviour {
 
     }
 	
-	// Update is called once per frame
 	private void Update () {
         timer += Time.deltaTime;
         if(progressBarHandlerScript != null)

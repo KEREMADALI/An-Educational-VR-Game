@@ -45,7 +45,7 @@ public class KillTimer : MonoBehaviour {
             progressBarHandlerScript = timerCircle.GetComponent<GazeImageHandler>();
     }
 
-    public void Update() { 
+    public void Update() {
 
         timer += Time.deltaTime;
         if(progressBarHandlerScript != null)

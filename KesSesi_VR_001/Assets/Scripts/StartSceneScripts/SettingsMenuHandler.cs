@@ -8,7 +8,7 @@ public class SettingsMenuHandler : MonoBehaviour {
 
     private Color disabledColor = new Color(1f, 1f, 1f, 100f / 255f);
     private Color enabledColor = new Color(52f / 255f, 109f / 255f, 25f / 255f, 1f);
-    private GameObject handler;
+    //private GameObject handler;
     private MenuHandler menuHandlerScript;
 
     // LetterGroup Panel objects for listener set up. Initiated on Unity API
@@ -18,7 +18,7 @@ public class SettingsMenuHandler : MonoBehaviour {
     private void Start()
     {
         // Find MenuHandler object for further use
-        handler = GameObject.Find("MenuHandler");
+        GameObject handler = GameObject.Find("MenuHandler");
         // Inform if can not be found
         if (handler == null)
             Debug.Log("Menu Handler object is null, settings will not be updated!");

@@ -9,7 +9,8 @@ public class MenuHandler : MonoBehaviour {
 
     public static MenuHandler instance;
 
-    public GameObject audioHandler;
+    // Looks like not being used
+    //public GameObject audioHandler;
 
     public static bool isopen;
 

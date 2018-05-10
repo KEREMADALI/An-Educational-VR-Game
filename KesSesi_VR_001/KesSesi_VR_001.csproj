@@ -384,7 +384,6 @@
     <Compile Include="Assets\Scripts\GamePlayScripts\LetterSpawner.cs" />
     <Compile Include="Assets\Scripts\GamePlayScripts\Result.cs" />
     <Compile Include="Assets\Scripts\GamePlayScripts\TerminateIfExists.cs" />
-    <Compile Include="Assets\Scripts\GamePlayScripts\UI\ActivateVR.cs" />
     <Compile Include="Assets\Scripts\GamePlayScripts\UI\CountDown.cs" />
     <Compile Include="Assets\Scripts\GamePlayScripts\UI\GazeImageHandler.cs" />
     <Compile Include="Assets\Scripts\GamePlayScripts\UI\GUIArrows.cs" />
@@ -395,6 +394,7 @@
     <Compile Include="Assets\Scripts\GamePlayScripts\UI\StartGamePanel.cs" />
     <Compile Include="Assets\Scripts\GamePlayScripts\UI\TimeBar.cs" />
     <Compile Include="Assets\Scripts\GamePlayScripts\UI\UIManager.cs" />
+    <Compile Include="Assets\Scripts\GamePlayScripts\UI\VRExit.cs" />
     <Compile Include="Assets\Scripts\NewBehaviourScript.cs" />
     <Compile Include="Assets\Scripts\StartSceneScripts\MenuHandler.cs" />
     <Compile Include="Assets\Scripts\StartSceneScripts\SaveAndLoad.cs" />

@@ -39,7 +39,6 @@ public class LetterSpawner : MonoBehaviour {
         audioHandler = audioManager.GetComponent<AudioHandler>();
     }
 
-
     //Adjust gravity and speed values to change letter speeds on the air
     void setGameSpeed() {
         GameObject menuHandlerObject = GameObject.Find("MenuHandler");
